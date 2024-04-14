@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+option go_package = "github.com/gyanesh-m/awesome-go/rpc/cardholders/v1";
+import "google/api/annotations.proto";
+
+package cardholders.v1;
+
+service CardHolderService {
+    rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse) {
+        option (google.api.http) = {
+            post: "/v1/accounts"
+            body: "*"
+        };
+    }
+    rpc GetAccount(GetAccountRequest) returns (GetAccountResponse) {
+        option (google.api.http) = {
+            get: "/v1/accounts/{account_id}"
+        };
+
+    }
+
+}
+
+message CreateAccountRequest {
+    string document_number = 1;
+}
+
+message CreateAccountResponse {
+    string account_id = 1;
+    string document_number = 2;
+}
+
+message GetAccountRequest {
+    string account_id = 1;
+}
+
+message GetAccountResponse {
+    string account_id = 1;
+    string document_number = 2;
+}
+
+

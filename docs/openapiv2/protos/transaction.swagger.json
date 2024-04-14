@@ -1,0 +1,174 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "protos/transaction.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "TransactionService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/transactions": {
+      "post": {
+        "operationId": "TransactionService_CreateTransaction",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateTransactionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateTransactionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TransactionService"
+        ]
+      }
+    },
+    "/v1/transactions/{transactionId}": {
+      "get": {
+        "operationId": "TransactionService_GetTransaction",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetTransactionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "transactionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TransactionService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1CreateTransactionRequest": {
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "type": "string"
+        },
+        "transactionType": {
+          "type": "string",
+          "format": "int64"
+        },
+        "amount": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1CreateTransactionResponse": {
+      "type": "object",
+      "properties": {
+        "transactionId": {
+          "type": "string"
+        },
+        "accountId": {
+          "type": "string"
+        },
+        "transactionType": {
+          "type": "string",
+          "format": "int64"
+        },
+        "amount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "eventTimestamp": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1GetTransactionResponse": {
+      "type": "object",
+      "properties": {
+        "transactionId": {
+          "type": "string"
+        },
+        "accountId": {
+          "type": "string"
+        },
+        "transactionType": {
+          "type": "string",
+          "format": "int64"
+        },
+        "amount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "eventTimestamp": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+Host : 0.0.0.0
+Port  : 8080
+GRPCPort : 8081
+Db:
+    Host: db
+    Port: 3306
+    User: root
+    Password: password
+    DbName: dev

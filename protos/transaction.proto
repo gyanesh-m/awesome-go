@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+option go_package = "github.com/gyanesh-m/awesome-go/rpc/transactions/v1";
+import "google/api/annotations.proto";
+
+package transactions.v1;
+
+service TransactionService {
+    rpc CreateTransaction(CreateTransactionRequest) returns (CreateTransactionResponse) {
+        option (google.api.http) = {
+            post: "/v1/transactions"
+            body: "*"
+        };
+    }
+    rpc GetTransaction(GetTransactionRequest) returns (GetTransactionResponse) {
+        option (google.api.http) = {
+            get: "/v1/transactions/{transaction_id}"
+        };
+    }
+}
+
+message CreateTransactionRequest {
+    string account_id = 1;
+    optional int64 transaction_type = 2;
+    optional int64 amount = 3;
+}
+
+message CreateTransactionResponse {
+    string transaction_id = 1;
+    string account_id = 2;
+    optional int64 transaction_type = 3;
+    optional int64 amount = 4;
+    int64 event_timestamp = 5;
+}
+
+message GetTransactionRequest {
+    string transaction_id = 1;
+}
+
+message GetTransactionResponse {
+    string transaction_id = 1;
+    string account_id = 2;
+    optional int64 transaction_type = 3;
+    optional int64 amount = 4;
+    int64 event_timestamp = 5;
+}
